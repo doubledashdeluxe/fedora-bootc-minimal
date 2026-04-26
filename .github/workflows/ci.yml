@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches-ignore: [dependabot/*]
+  pull_request:
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Build
+        uses: redhat-actions/buildah-build@v2
+        with:
+          containerfiles: Containerfile
+          image: ${{ github.repository }}
+          extra-args: --cap-add all --device /dev/fuse
+      - name: Push
+        if: |
+          github.event_name == 'push' &&
+          github.repository == 'doubledashdeluxe/fedora-bootc-minimal'
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ github.repository }}
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
