@@ -18,7 +18,7 @@ jobs:
       - name: Build
         uses: redhat-actions/buildah-build@v2
         with:
-          containerfiles: Containerfile
+          containerfiles: Dockerfile
           image: ${{ github.repository }}
           extra-args: --cap-add all --device /dev/fuse
       - name: Push
