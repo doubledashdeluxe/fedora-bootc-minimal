@@ -1,4 +1,4 @@
-FROM quay.io/fedora/fedora-bootc:latest@sha256:c6b268a602a5221d31c4e108076ca24efd214d0cc8ac11bb3163f7b0a45e1018 as builder
+FROM quay.io/fedora/fedora-bootc:latest@sha256:fd37687b57230e10f6313293072d315236a1869959e639dd1511598a0371ba07 as builder
 RUN /usr/libexec/bootc-base-imagectl build-rootfs --manifest=minimal /target-rootfs
 
 FROM scratch
