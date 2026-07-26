@@ -25,7 +25,7 @@ jobs:
         if: |
           github.event_name == 'push' &&
           github.repository == 'doubledashdeluxe/fedora-bootc-minimal'
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@v3
         with:
           image: ${{ github.repository }}
           registry: ghcr.io
